@@ -1,8 +1,8 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as timesActions from './actions/timesActions';
+import * as timesActions from './actions/times';
 
-import Layout from './components/Layout';
+import Layout from './components/layout';
 
 function mapStateToProps(state) {
     return {
