@@ -44,14 +44,14 @@ class Timer extends React.Component {
   }
 
   _format_time = (t) => {
-   var time = dateFns.format(t, "mm:ss");
-   var msec = dateFns.format(t, "SS");
+    var time = dateFns.format(t, "mm:ss");
+    var msec = dateFns.format(t, "SS");
 
-   if (msec.length < 2) {
-     return time + '.0' + msec;
-   } else {
-     return time + '.' + msec;
-   }
+    if (msec.length < 2) {
+      return time + '.0' + msec;
+    } else {
+      return time + '.' + msec;
+    }
 
 
   }
@@ -62,7 +62,9 @@ class Timer extends React.Component {
           <div className="timer">
             <div className="timer-text">{ this._format_time(this.props.current_time) }</div>
           </div>
-          <a href="#" onClick={ this._start }>start</a> <a href="#" onClick={ this._reset }>reset</a> <a href="#" onClick={ this._stop }>stop</a>
+          <div className="timer-controls">
+            <button type="button" onClick={ this._start } disabled={ this.state.running }>start</button> <a href="#" onClick={ this._reset }>reset</a> <button type="button" onClick={ this._stop } disabled={ !this.state.running }>stop</button>
+          </div>
       </div>
     );
   }
