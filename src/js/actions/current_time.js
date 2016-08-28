@@ -4,3 +4,9 @@ export function increase_time(data) {
         data
     }
 }
+
+export function reset_time() {
+    return {
+        type: 'RESET'
+    }
+}
