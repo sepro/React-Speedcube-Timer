@@ -1,6 +1,6 @@
 body
   background #33ccff
-
+  font-family "Trebuchet MS", Helvetica, sans-serif
 
 .timer
   background #3366ff
@@ -12,7 +12,6 @@ body
 .timer-text
   text-align center
   padding-top 100px
-  font-family "Trebuchet MS", Helvetica, sans-serif
   font-size 73px
   color white
   -moz-text-shadow 2px 2px 1px #000
@@ -36,3 +35,40 @@ body
   -moz-text-shadow 1px 1px 0.5px #000
   -webkit-text-shadow 1px 1px 0.5px #000
   text-shadow 1px 1px 0.5px #000
+
+.results-enter
+  opacity 0.01
+  transition opacity .5s ease-in
+
+.results-enter.results-enter-active
+  opacity 1
+
+.results-leave
+  opacity 1
+  transition opacity .5s ease-in
+
+.results-leave.results-leave-active
+  opacity 0
+
+.play-icon
+  background url("../img/Bitmap-3.png") center no-repeat
+  background-size contain
+  pointer-events none
+  width 30px
+  height 30px
+  margin 0 auto
+  margin-top -40px
+
+.play-icon
+  opacity 0
+  transition all 0.5s // time to fade out after its done
+  transform scale(1) // this is the "end state"
+  display block
+  &.play-enter
+    transition all .2s
+    transform scale(1)
+    opacity 1
+    &.play-enter-active
+      transform scale(5)
+  .play-leave-active
+    display none

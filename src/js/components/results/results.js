@@ -1,4 +1,6 @@
 import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
 import dateFns from 'date-fns'
 
 function compareNumbers(a, b) { return a - b; }
@@ -35,9 +37,11 @@ class Results extends React.Component {
     return (
       <div className="results">
       <strong>{ this._title(results.length) }</strong>
+      <ReactCSSTransitionGroup component="div"  transitionName="results" transitionEnterTimeout={300} transitionLeave={false}>
           { results.sort(compareNumbers).slice(0,5).map((result,i ) => {
-              return <p>{ this._format_time(result) } </p>;
+              return <p key={ i + '_' + result }>{ this._format_time(result) } </p>;
           })}
+      </ReactCSSTransitionGroup>
       </div>
     );
   }

@@ -1,4 +1,5 @@
 import React from "react";
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import dateFns from 'date-fns';
 
@@ -7,7 +8,7 @@ class Timer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {running: false, last_time: new Date()};
+    this.state = {running: false, last_time: new Date(), last_action: 'none'};
   }
 
   _increase_time = () => {
@@ -24,7 +25,7 @@ class Timer extends React.Component {
   _start = (ev) => {
     ev.preventDefault();
 
-    this.setState({...this.state, running: true, last_time: new Date()}, () => {this._increase_time()});
+    this.setState({...this.state, running: true, last_time: new Date(), last_action: 'start'}, () => {this._increase_time()});
   }
 
   _stop = (ev) => {
@@ -35,12 +36,12 @@ class Timer extends React.Component {
 
     this.props.increase_time(interval);
 
-    this.setState({...this.state, running: false}, () => {this.props.add_result(this.props.current_time)});
+    this.setState({...this.state, running: false, last_action: 'stop'}, () => {this.props.add_result(this.props.current_time)});
   }
 
   _reset = (ev) => {
     ev.preventDefault();
-    this.setState({...this.state, running: false}, () => {this.props.reset_time()});
+    this.setState({...this.state, running: false, last_action: 'reset'}, () => {this.props.reset_time()});
   }
 
   _format_time = (t) => {
@@ -61,6 +62,13 @@ class Timer extends React.Component {
       <div>
           <div className="timer">
             <div className="timer-text">{ this._format_time(this.props.current_time) }</div>
+            <ReactCSSTransitionGroup component="div" transitionName="play" transitionEnterTimeout={300} transitionLeave={false}>
+              <span
+			    key={ this.state.last_action }
+				className="play-icon">
+
+			  </span>
+            </ReactCSSTransitionGroup>
           </div>
           <div className="timer-controls">
             <button type="button" onClick={ this._start } disabled={ this.state.running }>start</button> <a href="#" onClick={ this._reset }>reset</a> <button type="button" onClick={ this._stop } disabled={ !this.state.running }>stop</button>

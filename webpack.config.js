@@ -20,7 +20,12 @@ module.exports = {
 		exclude: /(node_modules)/,
 		loader: 'style-loader!css-loader!stylus-loader',
 		include: path.join(__dirname, 'src/css')
-	  }
+	  },
+	  {
+        test: /\.png$/,
+        loader: "url-loader",
+        query: { mimetype: "image/png" }
+      }
     ]
   },
   plugins:[
