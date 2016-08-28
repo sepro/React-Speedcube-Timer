@@ -1,21 +1,13 @@
 import React from "react";
 
-export default class Layout extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      title: "Welcome",
-    };
-  }
+import Results from './results'
 
-  changeTitle(title) {
-    this.setState({title});
-  }
+export default class Layout extends React.Component {
 
   render() {
     return (
       <div>
-        <h1>{this.state.title}</h1>
+        <Results {...this.props} />
       </div>
     );
   }
