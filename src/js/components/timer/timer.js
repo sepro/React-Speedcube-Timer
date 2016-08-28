@@ -35,7 +35,7 @@ class Timer extends React.Component {
 
     this.props.increase_time(interval);
 
-    this.setState({...this.state, running: false}, () => {this.props.add_time(this.props.current_time)});
+    this.setState({...this.state, running: false}, () => {this.props.add_result(this.props.current_time)});
   }
 
   _reset = (ev) => {
@@ -43,10 +43,25 @@ class Timer extends React.Component {
     this.setState({...this.state, running: false}, () => {this.props.reset_time()});
   }
 
+  _format_time = (t) => {
+   var time = dateFns.format(t, "mm:ss");
+   var msec = dateFns.format(t, "SS");
+
+   if (msec.length < 2) {
+     return time + '.0' + msec;
+   } else {
+     return time + '.' + msec;
+   }
+
+
+  }
+
   render() {
     return (
       <div>
-          <p>{ dateFns.format(this.props.current_time, "mm:ss.SS") }</p>
+          <div className="timer">
+            <div className="timer-text">{ this._format_time(this.props.current_time) }</div>
+          </div>
           <a href="#" onClick={ this._start }>start</a> <a href="#" onClick={ this._reset }>reset</a> <a href="#" onClick={ this._stop }>stop</a>
       </div>
     );

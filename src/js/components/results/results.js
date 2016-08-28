@@ -8,8 +8,8 @@ class Results extends React.Component {
   render() {
     return (
       <div>
-          { this.props.times.sort(compareNumbers).slice(0,5).map((time,i ) => {
-              return <p>{ dateFns.format(time, "mm:ss.SS") }</p>;
+          { this.props.results.sort(compareNumbers).slice(0,5).map((result,i ) => {
+              return <p>{ dateFns.format(result, "mm:ss.SS") }</p>;
           })}
       </div>
     );

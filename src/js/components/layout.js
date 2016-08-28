@@ -1,7 +1,7 @@
 import React from "react";
 
-import Timer from './timer'
-import Results from './results'
+import Timer from './timer/timer'
+import Results from './results/results'
 
 export default class Layout extends React.Component {
 

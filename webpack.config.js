@@ -13,7 +13,14 @@ module.exports = {
         query: {
           presets: ['es2015', 'react', 'stage-0']
         }
-      }
+      },
+      // CSS
+	  {
+		test: /\.styl$/,
+		exclude: /(node_modules)/,
+		loader: 'style-loader!css-loader!stylus-loader',
+		include: path.join(__dirname, 'src/css')
+	  }
     ]
   },
   plugins:[
