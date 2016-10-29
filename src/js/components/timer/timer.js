@@ -96,7 +96,7 @@ class Timer extends React.Component {
             </ReactCSSTransitionGroup>
           </div>
           <div className="timer-controls">
-            <button type="button" onClick={ this._start } disabled={ this.state.running }>start</button> <button href="#" onClick={ this._pause } disabled={ !this.state.running }>pause</button> <button type="button" onClick={ this._stop }>stop</button>
+            <button className="button play-button" onClick={ this._start } disabled={ this.state.running } /> <button className="button pause-button" onClick={ this._pause } disabled={ !this.state.running } /> <button className="button stop-button" onClick={ this._stop } />
           </div>
       </div>
     );
