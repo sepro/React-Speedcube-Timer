@@ -1,7 +1,7 @@
 # React-Speedcube-Timer
 Pure reactjs project, runs a Speedcube-Timer
 
-DEMO: [here]()
+DEMO: [here](https://github.com/sepro/React-Speedcube-Timer)
 
 ## For developers
 Clone the repository and run npm install to pull in all the packages
