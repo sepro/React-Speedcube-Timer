@@ -25,10 +25,40 @@ class Timer extends React.Component {
   _start = (ev) => {
     ev.preventDefault();
 
+    if (this.state.last_action == 'stop') {
+        /*
+            Timer was stopped, reset before starting
+        */
+        this.props.reset_time()
+    }
+
     this.setState({...this.state, running: true, last_time: new Date(), last_action: 'start'}, () => {this._increase_time()});
   }
 
   _stop = (ev) => {
+    ev.preventDefault();
+
+    if (this.state.last_action == 'start')
+    {
+        /*
+            Timer is running, update time before stopping
+        */
+        const current_time = new Date();
+        const interval = dateFns.differenceInMilliseconds(current_time, this.state.last_time);
+
+        this.props.increase_time(interval);
+    }
+
+    if (this.state.last_action != 'stop')
+    {
+        /*
+            Timer is running or paused, add time to results
+        */
+        this.setState({...this.state, running: false, last_action: 'stop'}, () => {this.props.add_result(this.props.current_time)});
+    }
+  }
+
+  _pause = (ev) => {
     ev.preventDefault();
 
     const current_time = new Date();
@@ -36,12 +66,7 @@ class Timer extends React.Component {
 
     this.props.increase_time(interval);
 
-    this.setState({...this.state, running: false, last_action: 'stop'}, () => {this.props.add_result(this.props.current_time)});
-  }
-
-  _reset = (ev) => {
-    ev.preventDefault();
-    this.setState({...this.state, running: false, last_action: 'reset'}, () => {this.props.reset_time()});
+    this.setState({...this.state, running: false, last_action: 'pause'});
   }
 
   _format_time = (t) => {
@@ -62,16 +87,16 @@ class Timer extends React.Component {
       <div>
           <div className="timer">
             <div className="timer-text">{ this._format_time(this.props.current_time) }</div>
-            <ReactCSSTransitionGroup component="div" transitionName="play" transitionEnterTimeout={300} transitionLeave={false}>
+            <ReactCSSTransitionGroup component="div" transitionName={ this.state.last_action } transitionEnterTimeout={300} transitionLeave={false}>
               <span
 			    key={ this.state.last_action }
-				className="play-icon">
+				className= { this.state.last_action + "-icon" } >
 
 			  </span>
             </ReactCSSTransitionGroup>
           </div>
           <div className="timer-controls">
-            <button type="button" onClick={ this._start } disabled={ this.state.running }>start</button> <a href="#" onClick={ this._reset }>reset</a> <button type="button" onClick={ this._stop } disabled={ !this.state.running }>stop</button>
+            <button type="button" onClick={ this._start } disabled={ this.state.running }>start</button> <button href="#" onClick={ this._pause } disabled={ !this.state.running }>pause</button> <button type="button" onClick={ this._stop }>stop</button>
           </div>
       </div>
     );

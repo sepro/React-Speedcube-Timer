@@ -50,8 +50,8 @@ body
 .results-leave.results-leave-active
   opacity 0
 
-.play-icon
-  background url("../img/Bitmap-3.png") center no-repeat
+.start-icon
+  background url("../img/play.png") center no-repeat
   background-size contain
   pointer-events none
   width 30px
@@ -59,16 +59,62 @@ body
   margin 0 auto
   margin-top -40px
 
-.play-icon
+.start-icon
   opacity 0
   transition all 0.5s // time to fade out after its done
   transform scale(1) // this is the "end state"
   display block
-  &.play-enter
+  &.start-enter
     transition all .2s
     transform scale(1)
     opacity 1
-    &.play-enter-active
+    &.start-enter-active
       transform scale(5)
-  .play-leave-active
+  .start-leave-active
+    display none
+
+.pause-icon
+  background url("../img/pause.png") center no-repeat
+  background-size contain
+  pointer-events none
+  width 30px
+  height 30px
+  margin 0 auto
+  margin-top -40px
+
+.pause-icon
+  opacity 0
+  transition all 0.5s // time to fade out after its done
+  transform scale(1) // this is the "end state"
+  display block
+  &.pause-enter
+    transition all .2s
+    transform scale(1)
+    opacity 1
+    &.pause-enter-active
+      transform scale(5)
+  .pause-leave-active
+    display none
+
+.stop-icon
+  background url("../img/stop.png") center no-repeat
+  background-size contain
+  pointer-events none
+  width 30px
+  height 30px
+  margin 0 auto
+  margin-top -40px
+
+.stop-icon
+  opacity 0
+  transition all 0.5s // time to fade out after its done
+  transform scale(1) // this is the "end state"
+  display block
+  &.stop-enter
+    transition all .2s
+    transform scale(1)
+    opacity 1
+    &.stop-enter-active
+      transform scale(5)
+  .stop-leave-active
     display none
