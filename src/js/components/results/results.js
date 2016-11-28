@@ -1,9 +1,9 @@
 import React from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import FlipMove from 'react-flip-move';
 
 import dateFns from 'date-fns'
 
-function compareNumbers(a, b) { return a - b; }
+function compareNumbers(a, b) { return a.time - b.time; }
 
 class Results extends React.Component {
 
@@ -37,11 +37,11 @@ class Results extends React.Component {
     return (
       <div className="results">
       <strong>{ this._title(results.length) }</strong>
-      <ReactCSSTransitionGroup component="div"  transitionName="results" transitionEnterTimeout={300} transitionLeave={false}>
-          { results.sort(compareNumbers).slice(0,5).map((result,i ) => {
-              return <p key={ i + '_' + result }>{ this._format_time(result) } </p>;
+      <FlipMove easing="cubic-bezier(0, 0.7, 0.8, 0.1)">
+          { results.sort(compareNumbers).slice(0,5).map((result) => {
+              return <div key={ result.time + '_' + result.id }><p>{ this._format_time(result.time) }</p></div>;
           })}
-      </ReactCSSTransitionGroup>
+      </FlipMove>
       </div>
     );
   }
