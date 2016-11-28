@@ -54,7 +54,9 @@ class Timer extends React.Component {
         /*
             Timer is running or paused, add time to results
         */
-        this.setState({...this.state, running: false, last_action: 'stop'}, () => {this.props.add_result(this.props.current_time)});
+        this.setState({...this.state, running: false, last_action: 'stop'}, () => {
+            this.props.add_result({time: this.props.current_time, id: this.props.results.length})
+            });
     }
   }
 
