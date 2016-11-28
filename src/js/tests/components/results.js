@@ -7,7 +7,7 @@ import Results from '../../components/results/results.js';
 
 function setup() {
     let props = {
-        results: [100, 200]
+        results: [{time: 100, id: 0}, {time:200, id:1}]
     };
 
     let renderer = TestUtils.createRenderer();
